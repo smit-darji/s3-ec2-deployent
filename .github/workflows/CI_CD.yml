@@ -46,6 +46,7 @@ jobs:
             cd s3-ec2-deployent
             
           '
+          ls
           scp -i  private_key src/ ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
 
 # git checkout Master &&
