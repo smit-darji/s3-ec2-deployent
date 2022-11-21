@@ -36,22 +36,6 @@ jobs:
             
         run: |
           echo "$PRIVATE_KEY" > private_key && sudo chmod 400 private_key
-          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-          
-            #Now we have got the access of EC2 and we will start the deploy .
-            ls 
-            cd /home/ubuntu/test &&
-            git clone https://github.com/smit-darji/s3-ec2-deployent.git
-            cd s3-ec2-deployent
-            ls
-            
-          '
-          
-          # ls
-          # scp -i  private_key src/app.js ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
-
-# git checkout Master &&
-      # git pull origin Master &&
-      # git fetch --all &&
-      # git reset --hard origin/Master &&
-# docker-compose -f docker-compose.prod.yml up -d --build 
+          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          ls
+          scp -o StrictHostKeyChecking=no -i private_key src/app.js ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
