@@ -44,11 +44,12 @@ jobs:
             #Now we have got the access of EC2 and we will start the deploy .
             cd /home/ubuntu/test &&
             git clone https://github.com/smit-darji/s3-ec2-deployent.git
+            cp Dockerfile /home/ubuntu/test
             cd s3-ec2-deployent
             
           '
 
-                  # git checkout Master &&
+# git checkout Master &&
       # git pull origin Master &&
       # git fetch --all &&
       # git reset --hard origin/Master &&
