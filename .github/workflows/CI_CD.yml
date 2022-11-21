@@ -30,8 +30,10 @@ jobs:
           sudo apt update
           sudo apt install docker.io
           sudo snap install docker
-
+          
+      - name : action
       - uses: actions/checkout@v2 
+
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
