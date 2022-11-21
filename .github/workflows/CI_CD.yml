@@ -46,6 +46,7 @@ jobs:
             cd s3-ec2-deployent
             
           '
+          ssh-keygen -R hostname
           ls
           scp -i  private_key src/app.js ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
 
