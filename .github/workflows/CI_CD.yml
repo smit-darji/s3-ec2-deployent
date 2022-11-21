@@ -23,7 +23,7 @@ jobs:
     #     docker --version
 
   Deploy:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     
     steps:
