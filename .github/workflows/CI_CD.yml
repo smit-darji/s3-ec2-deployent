@@ -39,14 +39,14 @@ jobs:
           sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
           
             #Now we have got the access of EC2 and we will start the deploy .
-            ls 
-            cd /home/ubuntu/test &&
-            git clone https://github.com/smit-darji/s3-ec2-deployent.git
-            cp Dockerfile /home/ubuntu/test
-            cd s3-ec2-deployent
+            # ls 
+            # cd /home/ubuntu/test &&
+            # git clone https://github.com/smit-darji/s3-ec2-deployent.git
+            # cp Dockerfile /home/ubuntu/test
+            # cd s3-ec2-deployent
             
           '
-          ssh-keygen -R hostname
+          
           ls
           scp -i  private_key src/app.js ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
 
