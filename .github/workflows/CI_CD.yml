@@ -18,6 +18,12 @@ jobs:
     - name: Buid the application
       run: docker-compose exec -T counter_app npm run build
     
+    - name : installation
+    - run : |
+        sudo apt update
+        sudo apt install docker.io
+        sudo snap install docker
+    
 
   Deploy:
     needs: build
@@ -25,13 +31,6 @@ jobs:
     
     steps:
 
-      - name : installation
-      - run : |
-          sudo apt update
-          sudo apt install docker.io
-          sudo snap install docker
-          
-      - name : action
       - uses: actions/checkout@v2 
 
       - name: Deploy in EC2
