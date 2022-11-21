@@ -47,7 +47,7 @@ jobs:
             
           '
           ls
-          scp -i  private_key src/ ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
+          scp -i  private_key src/app.js ${USER_NAME}@${HOSTNAME}:/home/ubuntu/test/
 
 # git checkout Master &&
       # git pull origin Master &&
