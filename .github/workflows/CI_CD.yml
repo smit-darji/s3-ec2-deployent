@@ -5,22 +5,6 @@ on:
     branches: [ Master ]
 
 jobs:
-#First we will see the application build or not , then we will deploy in EC2
-  # build:
-  #   runs-on: ubuntu-latest
-    
-  #   steps:
-  #   - uses: actions/checkout@v2
-    
-    # - name: Build the docker_compose
-    #   run: docker-compose up -d --build
-      
-    # - name: Buid the application
-    #   run: docker-compose exec -T counter_app npm run build
-    # - name: Installation
-    #   run: |
-    #     sudo snap install docker
-    #     docker --version
 
   Deploy:
     # needs: build
@@ -39,3 +23,4 @@ jobs:
           sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
           ls
           scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          
