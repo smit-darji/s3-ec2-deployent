@@ -40,7 +40,7 @@ jobs:
             git checkout Master &&
             git fetch --all &&
             git reset --hard origin/Master &&
-            git pull origin master &&
+            git pull origin Master &&
             docker-compose -f docker-compose.prod.yml up -d --build 
           '
 
