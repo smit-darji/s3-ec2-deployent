@@ -17,14 +17,14 @@ jobs:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
-            LOCALFILENAME : "DummyFolder/smitdarji"
-            DESTINATION : "/home/ubuntu/test/"
+            LOCALFILENAME : "DummyFolder/ac"
+            DESTINATION : "~/test/"
             
         run: |
           echo "$PRIVATE_KEY" > key.pem
           sudo chmod 400 key.pem
           sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
-          scp -o StrictHostKeyChecking=no -i key.pem ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test
+          scp -o StrictHostKeyChecking=no -i key.pem ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
           echo "File copyed successully in Server"${LOCALFILENAME}
           
 
