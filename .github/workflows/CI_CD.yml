@@ -2,7 +2,7 @@ name: CI/CD counter app
 
 on:
   push:
-    branches: [ Master ]
+    branches: [ dev ]
 
 jobs:
 
@@ -12,15 +12,23 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
+      - name: Create keypair
+        run: |
+          aws ec2 create-key-pair \
+            --key-name private_key \
+            --key-type rsa \
+            --key-format pem \
+            --query "KeyMaterial" \
+            --output text > private_key.pem
       - name: Deploy in EC2
         env:
-            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-          echo "$PRIVATE_KEY" > private_key && sudo chmod 400 private_key
+          sudo chmod 400 private_key
           sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
           ls
-          scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          scp -o StrictHostKeyChecking=no -i private_key.pem package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
           
