@@ -23,14 +23,19 @@ jobs:
         run: |
           aws s3api list-buckets --query "Buckets[].Name"
           aws ec2 create-key-pair --key-name private_key.pem
-      # - name: Deploy in EC2
-      #   env:
-      #       # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-      #       HOSTNAME : ${{ secrets.HOSTNAME  }}
-      #       USER_NAME : ${{ secrets.USER_NAME  }}
+      - name: Deploy in EC2
+        env:
+            # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USER_NAME  }}
             
-      #   run: |
-      #     sudo chmod 400 private_key
-      #     sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
-      #     ls
-      #     scp -o StrictHostKeyChecking=no -i private_key.pem package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+        run: |
+          sudo chmod 400 private_key
+          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          ls
+          scp -o StrictHostKeyChecking=no -i private_key.pem package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ec2-user/test
+
+      - name: Remove keypair
+        run: |
+          aws ec2 delete-key-pair --key-name private_key.pem
+     
