@@ -22,8 +22,7 @@ jobs:
       - name: Create keypair
         run: |
           aws s3api list-buckets --query "Buckets[].Name"
-
-      #     aws ec2 create-key-pair --key-name private_key.pem
+          aws ec2 create-key-pair --key-name private_key.pem
       # - name: Deploy in EC2
       #   env:
       #       # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
