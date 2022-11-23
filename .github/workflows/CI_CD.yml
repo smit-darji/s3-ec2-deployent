@@ -13,34 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2 
 
-      - name: Configure AWS Connection
-        uses: aws-actions/configure-aws-credentials@v1
-        with: 
-          aws-access-key-id        : ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key    : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region               : "ap-south-1"
-
       - name: Create key Pair
         run: |
           aws ec2 create-key-pair --key-name AWS_PRIVATE_KEY
       - name: Deploy in EC2
         env:
-            # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-
+          echo "$PRIVATE_KEY" > key.pem
           ls
-          echo "--------------"
-          pwd
-
-          sudo chmod 400 AWS_PRIVATE_KEY
+          sudo chmod 400 key.pem
           echo "-------ssh-------"
-          sudo ssh -o StrictHostKeyChecking=no -i AWS_PRIVATE_KEY.pem ${USER_NAME}@${HOSTNAME} 
+          sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
           echo "------acp--------" 
-          scp -o StrictHostKeyChecking=no -i AWS_PRIVATE_KEY.pem -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
-          # echo "$PRIVATE_KEY" > private_key 
-          # cat private_key
+          scp -o StrictHostKeyChecking=no -i key.pem -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          
+          
 
 
