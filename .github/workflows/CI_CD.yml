@@ -21,6 +21,9 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key 
           ls
+          echo "--------------"
+          pwd
           sudo chmod 400 private_key
           sudo ssh -i private_key ${USER_NAME}@${HOSTNAME} 
+          scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
 
