@@ -23,13 +23,14 @@ jobs:
           ls
           echo "--------------"
           pwd
+          /home/runner/work/s3-ec2-deployent/s3-ec2-deployent/DummyFolder
           echo "-----c---------"
           cat private_key
           sudo chmod 400 private_key
           echo "-------ssh-------"
           sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
           echo "------acp--------" 
-          scp -o StrictHostKeyChecking=no -i private_key -r Dummyfolder/ ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          scp -o StrictHostKeyChecking=no -i private_key -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
           
           
 
