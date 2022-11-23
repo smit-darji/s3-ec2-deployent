@@ -17,7 +17,7 @@ jobs:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
-            LOCALFILENAME : "DummyFolder/xyz"
+            LOCALFILENAME : "DummyFolder/smitdarji"
             DESTINATION : "/home/ubuntu/test/"
             
         run: |
