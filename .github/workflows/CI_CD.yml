@@ -23,5 +23,5 @@ jobs:
           ls
           cat private_key
           sudo chmod 400 private_key
-          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          sudo ssh -i private_key ${USER_NAME}@${HOSTNAME} 
 
