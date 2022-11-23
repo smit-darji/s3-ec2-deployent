@@ -17,7 +17,8 @@ jobs:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
-            FILENAME : "DummyFolder/x"
+            LOCALFILENAME : "DummyFolder/xyz"
+            DESTINATION : "/home/ubuntu/test/"
             
         run: |
           echo "$PRIVATE_KEY" > key.pem
@@ -26,7 +27,7 @@ jobs:
           echo "-------ssh-------"
           sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
           echo "------acp--------" 
-          scp -o StrictHostKeyChecking=no -i key.pem -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          scp -o StrictHostKeyChecking=no -i key.pem -r ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
           
           
 
