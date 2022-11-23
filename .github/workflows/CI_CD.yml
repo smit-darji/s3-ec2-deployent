@@ -24,3 +24,4 @@ jobs:
           ls
           scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
           
+          
