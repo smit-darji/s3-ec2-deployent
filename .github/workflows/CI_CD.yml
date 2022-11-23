@@ -15,7 +15,7 @@ jobs:
 
       - name: Create key Pair
         run: |
-          aws ec2 create-key-pair --key-name AWS_PRIVATE_KEY
+          aws ec2 create-key-pair --key-name test
       - name: Deploy in EC2
         env:
             # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -28,11 +28,11 @@ jobs:
           echo "--------------"
           pwd
 
-          sudo chmod 400 private_key
+          sudo chmod 400 test
           echo "-------ssh-------"
-          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          sudo ssh -o StrictHostKeyChecking=no -i test.pem ${USER_NAME}@${HOSTNAME} 
           echo "------acp--------" 
-          scp -o StrictHostKeyChecking=no -i private_key.pem -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          scp -o StrictHostKeyChecking=no -i test.pem -r DummyFolder ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
           # echo "$PRIVATE_KEY" > private_key 
           # cat private_key
 
