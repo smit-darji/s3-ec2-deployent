@@ -1,9 +1,9 @@
 name: CI/CD counter app
 
 on:
-  pull_request:
-    types:
-      - closed
+  push: 
+      branches:
+      - smit
       
 jobs:
   Deploy:
@@ -23,6 +23,9 @@ jobs:
         run: |
 
           sudo chmod 400 $PRIVATE_KEY
+          echo "----------a-"
           sudo ssh -i $PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 
+          echo "----------b-"
           scp -i $PRIVATE_KEY ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
+          echo "----------c-"
           echo "File copyed successully in Server"${LOCALFILENAME}
