@@ -20,16 +20,11 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > key.pem
           sudo chmod 400 key.pem
-          sudo ssh  -i key.pem ${USER_NAME}@${HOSTNAME} 
-          scp  -i key.pem ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
+          sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
+          scp -o StrictHostKeyChecking=no -i key.pem ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
           echo "File copyed successully in Server"${LOCALFILENAME}
 
 
-# echo "$PRIVATE_KEY" > key.pem
-# sudo chmod 400 key.pem
-# sudo ssh  -i key.pem ${USER_NAME}@${HOSTNAME} 
-# scp  -i key.pem ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
-# echo "File copyed successully in Server"${LOCALFILENAME}
           
 
 
