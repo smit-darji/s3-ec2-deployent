@@ -19,7 +19,7 @@ jobs:
             
         run: |
 
-          sudo chmod 400 ${$PRIVATE_KEY}
+          sudo chmod 400 ${PRIVATE_KEY}
           sudo ssh  -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} 
           scp  -i ${PRIVATE_KEY} ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
           echo "File copyed successully in Server"${LOCALFILENAME}
