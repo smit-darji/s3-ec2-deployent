@@ -18,12 +18,10 @@ jobs:
             DESTINATION : "~/test/"
             
         run: |
-          echo "-1"
-          sudo chmod 400 ${PRIVATE_KEY}
-          echo "-2"
-          sudo ssh  -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} 
-          echo "-3"
-          scp  -i ${PRIVATE_KEY} ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
+          echo "$PRIVATE_KEY" > key.pem
+          sudo chmod 400 key.pem
+          sudo ssh  -i key.pem ${USER_NAME}@${HOSTNAME} 
+          scp  -i key.pem ${LOCALFILENAME} ${USER_NAME}@${{secrets.AWS_DNS}}:${DESTINATION}
           echo "File copyed successully in Server"${LOCALFILENAME}
 
 
