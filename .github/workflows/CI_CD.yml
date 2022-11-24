@@ -23,6 +23,6 @@ jobs:
         run: |
 
           sudo chmod 400 $PRIVATE_KEY
-          sudo ssh -o StrictHostKeyChecking=no -i $PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 
-          scp -o StrictHostKeyChecking=no -i $PRIVATE_KEY ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
+          sudo ssh -i $PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 
+          scp -i $PRIVATE_KEY ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
           echo "File copyed successully in Server"${LOCALFILENAME}
