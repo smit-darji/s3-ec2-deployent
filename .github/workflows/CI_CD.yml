@@ -1,8 +1,8 @@
 name: CI/CD counter app
 
 on:
-  push: 
-
+  push:
+    branches: [ Smit ]
       
 jobs:
   Deploy:
