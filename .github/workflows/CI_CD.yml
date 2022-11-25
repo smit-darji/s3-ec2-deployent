@@ -9,13 +9,18 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
+      - name: Installation
+        run : |
+          sudo apt update
+          sudo apt install sshpass
+
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             PASSWORD : ${{ secrets.PASSWORD  }}
-            SOURCE : "DummyFolder/ac"
+            SOURCE : "DummyFolder/test.py"
             DESTINATION : "C:/Users/Administrator/Downloads/demo/"
             
         run: |
