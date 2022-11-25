@@ -14,8 +14,11 @@ jobs:
           sudo apt update
           sudo apt install sshpass
           sudo apt-get install openssh-server
+          sudo systemctl enable ssh
+          sudo systemctl enable ssh --now
+          sudo systemctl start ssh
           echo "----------------------------------------------------------------------------------"
-          sudo service ssh status
+          sudo systemctl status ssh
 
       - name: Deploy in EC2
         env:
