@@ -13,6 +13,10 @@ jobs:
         run : |
           sudo apt update
           sudo apt install sshpass
+          sudo apt-get install openssh-server
+          sudo service ssh status
+          sudo service ssh start
+          sudo service ssh status
 
       - name: Deploy in EC2
         env:
