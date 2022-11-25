@@ -1,17 +1,26 @@
-name: pythonj
+name: Test Python Input
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - smit
+    inputs:
+      myInput:
+        description: 'User Input Here'
+        required: true
+        default: "Hello World"
 
 jobs:
-  Publish:
+  run-python-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.1.0
-      - run: |
-          output=$(python test.py)
-        id: step1
-      - name: Print changelog
-        run: echo "${{ steps.step1.outputs.changelog }}"
+  
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.8
+
+      - name: Execute Test Script
+        run: |
+          echo "Store: ${{ github.event.inputs.myInput }}"
+          INPUT_STORE=${{ github.event.inputs.myInput }} python3 test.py
