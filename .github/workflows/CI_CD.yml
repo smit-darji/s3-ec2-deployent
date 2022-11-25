@@ -28,7 +28,7 @@ jobs:
             DESTINATION : "C:/Users/Administrator/Downloads/demo/"
             
         run: |
-          sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
+          sshpass -p ${PASSWORD} scp ${SOURCE} -p 22 ${USER_NAME}@${HOSTNAME}:${DESTINATION}
           echo $SOURCE" : is SuccessFully Uploaded"
 # echo "$PRIVATE_KEY" > key.pem
 # sudo chmod 400 key.pem
