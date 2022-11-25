@@ -30,6 +30,7 @@ jobs:
             DESTINATION : "C:/Users/Administrator/Downloads/demo/"
             
         run: |
+          sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
           sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
           echo $SOURCE" : is SuccessFully Uploaded"
 # echo "$PRIVATE_KEY" > key.pem
