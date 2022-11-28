@@ -2,7 +2,7 @@ name: CI/CD counter app
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ Master ]
 
 jobs:
 
@@ -12,31 +12,14 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: "ap-south-1"
-
-      - name: Create keypair
-        run: |
-          aws ec2 create-key-pair --key-name private_key.pem
-          ls 
       - name: Deploy in EC2
         env:
-            # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-          sudo chmod 400 private_key
-          sudo ssh -o StrictHostKeyChecking=no -i private_key ${{ secrets.USER_NAME  }}@${{ secrets.HOSTNAME  }}
+          echo "$PRIVATE_KEY" > private_key && sudo chmod 400 private_key
+          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
           ls
-          scp -o StrictHostKeyChecking=no -i private_key.pem package.json ${{ secrets.USER_NAME  }}@${{secrets.AWS_DNS}}:/home/ec2-user/test
-
-      - name: Remove keypair
-        run: |
-          aws ec2 delete-key-pair --key-name private_key.pem
-          
-     
+          scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:C:/Users/Administrator/Downloads/demo
