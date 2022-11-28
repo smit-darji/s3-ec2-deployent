@@ -21,8 +21,7 @@ jobs:
             DESTINATION : "~/test/"
             
         run: |
-
-          sudo chmod 400 $PRIVATE_KEY
-          sudo ssh -i $PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 
-          scp -i $PRIVATE_KEY ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
-          echo "File copyed successully in Server"${LOCALFILENAME}
+          echo "$PRIVATE_KEY" > private_key && sudo chmod 400 private_key
+          sudo ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          ls
+          scp -o StrictHostKeyChecking=no -i private_key package.json ${USER_NAME}@${{secrets.AWS_DNS}}:C:/Users/Administrator/Downloads/demo
