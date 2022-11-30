@@ -25,8 +25,9 @@ jobs:
           ls
           echo "------------pwd------------------"
           pwd
-        # echo "------------scp--------------"
-        # scp -o StrictHostKeyChecking=no ${SOURCE} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          cat id_rsa
+          echo "------------scp--------------"
+          scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
 # sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
 # sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
 # echo $SOURCE" : is SuccessFully Uploaded"
