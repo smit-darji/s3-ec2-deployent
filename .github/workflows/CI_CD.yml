@@ -18,15 +18,13 @@ jobs:
             DESTINATION : "C:/demo"
             
         run: |
-          cd ~/.ssh/
+          echo "-------------privatekey gen---------------"
+          echo "$PRIVATE_KEY" > id_rsa && sudo chmod 400 id_rsa
+          sudo ssh -o StrictHostKeyChecking=no -i id_rsa ${USER_NAME}@${HOSTNAME} 
+          echo "--------------list--------------------"
           ls
-        # echo "-------------privatekey gen---------------"
-        # echo "$PRIVATE_KEY" > id_rsa && sudo chmod 400 id_rsa
-        # sudo ssh -o StrictHostKeyChecking=no -i id_rsa ${USER_NAME}@${HOSTNAME} 
-        # echo "--------------list--------------------"
-        # ls
-        # echo "------------pwd------------------"
-        # pwd
+          echo "------------pwd------------------"
+          pwd
         # echo "------------scp--------------"
         # scp -o StrictHostKeyChecking=no ${SOURCE} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
 # sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
