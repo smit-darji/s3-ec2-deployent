@@ -18,8 +18,7 @@ jobs:
             DESTINATION : "C:/demo"
             
         run: |
-          ls
-          type "$PRIVATE_KEY" >> id_rsa
+          type $PRIVATE_KEY >> id_rsa
           ls
 # echo "$PRIVATE_KEY" > id_rsa 
 # sudo chmod 400 id_rsa
