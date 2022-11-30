@@ -9,6 +9,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
+      
+      - name: test
+        run: "
+          cd C:/ProgramData/ssh
+          ls
+      
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
