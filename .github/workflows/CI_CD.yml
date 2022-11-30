@@ -22,10 +22,12 @@ jobs:
           echo "-----"
           pwd
           echo "-----"
+          ls
           $path = ".\id_rsa"
           icacls.exe $path /reset
           icacls.exe $path /GRANT:R "$($env:USERNAME):(R)"
           icacls.exe $path /inheritance:r
+          ls
           scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINN}
 
 
