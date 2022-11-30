@@ -34,7 +34,7 @@ jobs:
           icacls.exe $path /GRANT:R "$($env:USERNAME):(R)"
           icacls.exe $path /inheritance:r
           ls
-          scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINN}
+          Copy-Item -Path ${SOURCE} -Destination ${DESTINATION} -PassThru
 
 
 # icacls id_rsa /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
