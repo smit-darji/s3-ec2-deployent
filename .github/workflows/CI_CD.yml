@@ -24,16 +24,6 @@ jobs:
             DESTINATION : "C:/demo"
             
         run: |
-          echo "$PRIVATE_KEY" >> id_rsa
-          echo "-----"
-          pwd
-          echo "-----"
-          ls
-          $path = ".\id_rsa"
-          icacls.exe $path /reset
-          icacls.exe $path /GRANT:R "$($env:USERNAME):(R)"
-          icacls.exe $path /inheritance:r
-          ls
           Copy-Item -Path ${SOURCE} -Destination ${DESTINATION} -PassThru
 
 
