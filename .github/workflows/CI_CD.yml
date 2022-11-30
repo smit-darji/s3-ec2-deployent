@@ -20,7 +20,9 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" >> id_rsa
           ls
+          echo "-----"
           pwd
+          echo "-----"
           $path = ".\id_rsa"
           icacls.exe $path /reset
           icacls.exe $path /GRANT:R "$($env:USERNAME):(R)"
