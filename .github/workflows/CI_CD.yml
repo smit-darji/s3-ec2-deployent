@@ -27,8 +27,7 @@ jobs:
           icacls.exe $path /reset
           icacls.exe $path /GRANT:R "$($env:USERNAME):(R)"
           icacls.exe $path /inheritance:r
-
-# scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINN}
+          scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINN}
 
 
 # icacls id_rsa /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
