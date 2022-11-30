@@ -15,7 +15,7 @@ jobs:
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             SOURCE : "DummyFolder/test.py"
-            DESTINATION : "C:/Users/Administrator/Downloads/"
+            DESTINATION : "C:/demo"
             
         run: |
           echo "-------------privatekey gen---------------"
@@ -26,7 +26,7 @@ jobs:
           echo "------------pwd------------------"
           pwd
           echo "------------scp--------------"
-          scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
+          scp -o StrictHostKeyChecking=no ${SOURCE} ${USER_NAME}@${{secrets.AWS_DNS}}:/home/ubuntu/test/
 # sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
 # sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
 # echo $SOURCE" : is SuccessFully Uploaded"
