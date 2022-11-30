@@ -18,26 +18,8 @@ jobs:
             DESTINATION : "C:/demo"
             
         run: |
-          echo "-------------privatekey gen---------------"
           echo "$PRIVATE_KEY" > id_rsa && sudo chmod 400 id_rsa
-          ss
-          sudo ssh -o StrictHostKeyChecking=no -i id_rsa ${USER_NAME}@${HOSTNAME} 
-          echo "--------------list--------------------"
-          ls
-          echo "------------pwd------------------"
-          pwd
-          cat id_rsa
-          echo "------------scp--------------"
           scp -o StrictHostKeyChecking=no -i id_rsa ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
-# sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
-# sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
-# echo $SOURCE" : is SuccessFully Uploaded"
-# echo "$PRIVATE_KEY" > key.pem
-# sudo chmod 400 key.pem
-# sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
-# scp -o StrictHostKeyChecking=no -i key.pem ${LOCALFILENAME} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
-# echo "File copyed successully in Server"${LOCALFILENAME}
-
 
 
           
