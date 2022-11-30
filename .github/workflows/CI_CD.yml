@@ -9,31 +9,21 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
-      - name: Installation
-        run : |
-          sudo apt-get -s upgrade | grep -P "\d\K upgraded"
-          sudo apt install sshpass
-          sudo apt-get install openssh-server
-          sudo systemctl enable ssh
-          sudo systemctl enable ssh --now
-          sudo systemctl start ssh
-          echo "----------------------------------------------------------------------------------"
-          sudo systemctl status ssh
-          sudo ufw allow 22/tcp
-
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
-            PASSWORD : ${{ secrets.PASSWORD  }}
             SOURCE : "DummyFolder/test.py"
-            DESTINATION : "C:/Users/Administrator/Downloads/demo/"
+            DESTINATION : "C:/Users/Administrator/Downloads/"
             
         run: |
-          sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
-          sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
-          echo $SOURCE" : is SuccessFully Uploaded"
+          ls
+          cd ~/.ssh/
+          ls 
+# sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
+# sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
+# echo $SOURCE" : is SuccessFully Uploaded"
 # echo "$PRIVATE_KEY" > key.pem
 # sudo chmod 400 key.pem
 # sudo ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} 
