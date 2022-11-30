@@ -18,9 +18,13 @@ jobs:
             DESTINATION : "C:/Users/Administrator/Downloads/"
             
         run: |
+          echo "-------------privatekey gen---------------"
+          echo "$PRIVATE_KEY" > id_rsa && sudo chmod 400 id_rsa
+          sudo ssh -o StrictHostKeyChecking=no -i id_rsa ${USER_NAME}@${HOSTNAME} 
+          echo "--------------list--------------------"
           ls
-          cd ~/.ssh/
-          ls 
+          echo "------------pwd------------------"
+          pwd
 # sshpass -p ${PASSWORD} ssh ${USER_NAME}@${HOSTNAME}
 # sshpass -p ${PASSWORD} scp ${SOURCE} ${USER_NAME}@${HOSTNAME}:${DESTINATION}
 # echo $SOURCE" : is SuccessFully Uploaded"
