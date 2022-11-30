@@ -18,7 +18,7 @@ jobs:
             DESTINATION : "C:/demo"
             
         run: |
-          cd /home/runner 
+          cd ~/.ssh/
           ls
         # echo "-------------privatekey gen---------------"
         # echo "$PRIVATE_KEY" > id_rsa && sudo chmod 400 id_rsa
